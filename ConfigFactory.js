@@ -15,9 +15,8 @@ const mapper = {
 export default class {
   static factory(filePath) {
     const type = path.extname(filePath).slice(1);
-    const parserClass = mapper[type];
     const data = fs.readFileSync(filePath, 'utf-8');
   
-    return new Config(new parserClass().parse(data));
+    return new Config(new mapper[type]().parse(data));
   }
 };
